@@ -1,7 +1,7 @@
 %ラの音データ読み込み
 [y,fs] = audioread("A4.wav");
 
-%神郷町長取得
+%信号長取得
 signalLength = size(y,1);
 
 %fftSize定義
