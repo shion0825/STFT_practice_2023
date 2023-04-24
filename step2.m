@@ -30,7 +30,7 @@ spec = zeros(fftsize,n_row);
 
 for n = 1:n_row
     %yから抽出
-    vec = y(1+(n-1)*shiftsize:fftsize+(n-1)*shiftsize,1);
+    vec = y_padding(1+(n-1)*shiftsize:fftsize+(n-1)*shiftsize,1);
 
     %ハン窓乗算
     vec_window = vec .* window;
@@ -39,5 +39,5 @@ for n = 1:n_row
     dft_y = fft(vec_window);
 
     %結果格納
-    spec(:,n) = dft_y; 
+    spec(:,n) = dft_y;
 end
