@@ -1,43 +1,43 @@
 %ラの音データ読み込み
 [y,fs] = audioread("A4.wav");
 
-%fft長取得
-length= size(y,1);
+%神郷町長取得
+signalLength = size(y,1);
 
-%fftsize定義
-fftsize = 1024;
+%fftSize定義
+fftSize = 1024;
 
-%shiftsize定義
-shiftsize = fftsize/2;
+%shiftSize定義
+shiftSize = fftSize / 2;
 
 %ハン窓作成
-window = hann(fftsize);
+window = hann(fftSize);
 
 %行サイズ計算
-n_row = ceil((length-fftsize)/shiftsize)+1;
+numRow = ceil((signalLength - fftSize) / shiftSize) + 1;
 
-%paddingsize計算
-paddingsize = fftsize -1;
+%paddingSize計算
+paddingSize = fftSize - 1;
 
 %zeros生成
-padding = zeros(paddingsize,1);
+padding = zeros(paddingSize,1);
 
 %padding結合
-y_padding = [y;padding];
+yPadding = [y;padding];
 
 %spec定義
-spec = zeros(fftsize,n_row);
+spec = zeros(fftSize,numRow);
 
-for n = 1:n_row
+for n = 1:numRow
     %yから抽出
-    vec = y_padding(1+(n-1)*shiftsize:fftsize+(n-1)*shiftsize,1);
+    vec = yPadding(1 + (n - 1)*shiftSize:fftSize + (n - 1)*shiftSize,1);
 
     %ハン窓乗算
-    vec_window = vec .* window;
+    vecWindow = vec .* window;
 
     %fft
-    dft_y = fft(vec_window);
+    yDft = fft(vecWindow);
 
     %結果格納
-    spec(:,n) = dft_y;
+    spec(:,n) = yDft;
 end
